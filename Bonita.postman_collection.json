@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "6c09bb85-4bdd-4e93-9f59-37eafec8a3bb",
+		"name": "Bonita",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12150830"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set('bonita_token', pm.cookies.get('X-Bonita-API-Token'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "walter.bates",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "bpm",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/loginservice",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"loginservice"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "country",
+			"item": [
+				{
+					"name": "List process",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/API/bpm/process?p=0&c=10&f=name=CountryPool",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"API",
+								"bpm",
+								"process"
+							],
+							"query": [
+								{
+									"key": "p",
+									"value": "0"
+								},
+								{
+									"key": "c",
+									"value": "10"
+								},
+								{
+									"key": "f",
+									"value": "name=CountryPool"
+								}
+							]
+						},
+						"description": "[https://api-documentation.bonitasoft.com/latest/#tag/Process/operation/searchProcesses](https://api-documentation.bonitasoft.com/latest/#tag/Process/operation/searchProcesses)"
+					},
+					"response": []
+				},
+				{
+					"name": "List activities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/API/bpm/activity?p=0&c=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"API",
+								"bpm",
+								"activity"
+							],
+							"query": [
+								{
+									"key": "p",
+									"value": "0"
+								},
+								{
+									"key": "c",
+									"value": "10"
+								}
+							]
+						},
+						"description": "[https://api-documentation.bonitasoft.com/latest/#tag/Process/operation/searchProcesses](https://api-documentation.bonitasoft.com/latest/#tag/Process/operation/searchProcesses)"
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/API/bdm/businessData/com.company.model.Country?p=0&c=10&q=find",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"API",
+								"bdm",
+								"businessData",
+								"com.company.model.Country"
+							],
+							"query": [
+								{
+									"key": "p",
+									"value": "0"
+								},
+								{
+									"key": "c",
+									"value": "10"
+								},
+								{
+									"key": "q",
+									"value": "find"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/API/bdm/businessData/com.company.model.Country?p=0&c=10&q=countForFind",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"API",
+								"bdm",
+								"businessData",
+								"com.company.model.Country"
+							],
+							"query": [
+								{
+									"key": "p",
+									"value": "0"
+								},
+								{
+									"key": "c",
+									"value": "10"
+								},
+								{
+									"key": "q",
+									"value": "countForFind"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Bonita-API-Token",
+								"value": "{{bonita_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"processDefinitionId\": 6738162340367060989,\n    \"variables\" : [\n        {\n            \"name\": \"action\",\n            \"value\" : \"create\"\n        },\n        {\n            \"name\": \"id\",\n            \"value\" : 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/API/bpm/case",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"API",
+								"bpm",
+								"case"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Execute task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Bonita-API-Token",
+								"value": "{{bonita_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"countryInput\":\n    {\n        \"name\" : \"Abc\",\n        \"persistenceId\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/API/bpm/userTask/:id/execution?assign=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"API",
+								"bpm",
+								"userTask",
+								":id",
+								"execution"
+							],
+							"query": [
+								{
+									"key": "assign",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "20035"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:8080/bonita",
+			"type": "string"
+		},
+		{
+			"key": "bonita_token",
+			"value": ""
+		}
+	]
+}
